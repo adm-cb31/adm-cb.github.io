@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Portfolio d'Adam Chiboub, étudiant en BTS SIO option SISR à l'Institut Limayrac.">
+<title>Portfolio Adam Chiboub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+/* Layout : colonne centrée 1080px, sections empilées, lueur violette en haut, accents dégradé violet → vert */
+:root {
+  --bg: #06050a;
+  --bg-2: #0b0912;
+  --surface: #0f0c17;
+  --line: #1f1a2d;
+  --fg: #e6e1ef;
+  --muted: #8e87a1;
+  --violet: #a77bff;
+  --violet-strong: #8b5cf6;
+  --green: #4ade80;
+  --green-soft: rgba(74, 222, 128, .09);
+  --glow: rgba(139, 92, 246, .20);
+  --grad: linear-gradient(90deg, var(--violet-strong), var(--green));
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+body {
+  margin: 0;
+  background:
+    radial-gradient(ellipse 90% 520px at 50% -120px, var(--glow), transparent 70%),
+    var(--bg);
+  color: var(--fg);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+a { color: var(--violet); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 4px; }
+
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+
+/* Navigation */
+nav.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  border-bottom: 1px solid var(--line);
+}
+nav.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+.brand { font-family: var(--f-mono); font-weight: 700; color: var(--green); text-decoration: none; font-size: 15px; white-space: nowrap; }
+.brand span { color: var(--muted); font-weight: 400; }
+.nav-links { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; font-size: 14px; }
+.nav-links a { color: var(--muted); text-decoration: none; }
+.nav-links a:hover { color: var(--violet); }
+@media (max-width: 760px) { .nav-links { display: none; } }
+
+/* Hero */
+.hero { padding-block: 88px 72px; display: grid; gap: 22px; }
+.role { font-family: var(--f-mono); color: var(--green); font-size: 15px; margin: 0; }
+.role::before { content: "$ "; color: var(--muted); }
+.role .cursor { display: inline-block; width: .55em; height: 1.05em; background: var(--green); vertical-align: -2px; margin-left: 4px; animation: blink 1.1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+h1 {
+  font-family: var(--f-display); font-weight: 800; letter-spacing: -.02em;
+  font-size: clamp(44px, 8vw, 88px); line-height: 1; margin: 0; text-wrap: balance;
+}
+.hero p.lead { max-width: 60ch; color: var(--muted); font-size: 18px; margin: 0; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--f-body); font-weight: 600; font-size: 15px;
+  padding: 12px 22px; border-radius: 999px; text-decoration: none; cursor: pointer; border: 0;
+}
+.btn-grad { background: var(--grad); color: #0e0b14; box-shadow: 0 8px 28px -10px var(--glow); transition: transform .15s, box-shadow .15s; }
+.btn-grad:hover { transform: translateY(-1px); box-shadow: 0 12px 34px -8px var(--glow); }
+.btn-ghost { color: var(--fg); border: 1px solid var(--line); background: transparent; }
+.btn-ghost:hover { border-color: var(--violet); }
+.facts { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 18px; font-family: var(--f-mono); font-size: 13px; color: var(--muted); }
+.facts b { color: var(--fg); font-weight: 500; }
+
+/* Sections */
+section { padding-block: 64px; scroll-margin-top: 70px; }
+.sec-head { margin-bottom: 36px; }
+.sec-head h2 {
+  font-family: var(--f-display); font-weight: 700; font-size: clamp(28px, 4vw, 38px);
+  letter-spacing: -.01em; margin: 0; display: inline-block; text-wrap: balance;
+}
+.sec-head h2::after { content: ""; display: block; height: 3px; width: 100%; max-width: 120px; margin-top: 10px; border-radius: 3px; background: var(--grad); }
+.sec-head p { color: var(--muted); max-width: 64ch; margin: 14px 0 0; }
+
+.tag {
+  font-family: var(--f-mono); font-size: 12.5px; color: var(--green);
+  background: var(--green-soft); border: 1px solid color-mix(in srgb, var(--green) 30%, transparent);
+  padding: 3px 9px; border-radius: 6px; white-space: nowrap;
+}
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* À propos */
+.about { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: start; }
+.about > * { min-width: 0; }
+.about p { margin: 0 0 14px; max-width: 62ch; }
+.idcard { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 22px; font-family: var(--f-mono); font-size: 13.5px; }
+.idcard dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; margin: 0; }
+.idcard dt { color: var(--muted); }
+.idcard dd { margin: 0; color: var(--fg); }
+@media (max-width: 760px) { .about { grid-template-columns: 1fr; } }
+
+/* Compétences */
+.skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.skill { background: var(--bg-2); padding: 24px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.skill .code { font-family: var(--f-mono); font-size: 12px; color: var(--violet); letter-spacing: .04em; }
+.skill h3 { font-family: var(--f-display); font-weight: 700; font-size: 19px; line-height: 1.25; margin: 0; }
+.skill p { margin: 0; color: var(--muted); font-size: 14.5px; }
+@media (max-width: 900px) { .skills { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .skills { grid-template-columns: 1fr; } }
+
+.tech { margin-top: 28px; display: grid; gap: 14px; }
+.tech-row { display: grid; grid-template-columns: 150px 1fr; gap: 14px; align-items: baseline; }
+.tech-row > span { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+@media (max-width: 560px) { .tech-row { grid-template-columns: 1fr; gap: 6px; } }
+
+/* Réalisations */
+.projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.project { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 24px; display: grid; gap: 14px; align-content: start; min-width: 0; transition: border-color .2s; }
+.project:hover { border-color: var(--violet); }
+.project .meta { display: flex; justify-content: space-between; gap: 10px; font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.project .meta .ctx { color: var(--violet); }
+.project h3 { font-family: var(--f-display); font-weight: 700; font-size: 21px; line-height: 1.2; margin: 0; }
+.project p { margin: 0; color: var(--muted); font-size: 15px; }
+.project ul { margin: 0; padding-left: 18px; font-size: 14.5px; display: grid; gap: 4px; }
+.project .comp { font-size: 12.5px; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 12px; }
+.project .comp b { color: var(--fg); font-weight: 600; }
+@media (max-width: 760px) { .projects { grid-template-columns: 1fr; } }
+
+/* Tableau de synthèse */
+.matrix-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+table.matrix { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 14px; }
+.matrix th, .matrix td { padding: 12px 14px; border-bottom: 1px solid var(--line); text-align: center; }
+.matrix thead th { font-family: var(--f-mono); font-size: 11.5px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; vertical-align: bottom; line-height: 1.35; }
+.matrix th[scope="row"], .matrix thead th:first-child { text-align: left; font-family: var(--f-body); font-size: 14px; font-weight: 600; color: var(--fg); text-transform: none; letter-spacing: 0; }
+.matrix th[scope="row"] small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+.matrix tbody tr:last-child > * { border-bottom: 0; }
+.matrix tbody tr:hover { background: var(--bg-2); }
+.dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--grad); }
+.matrix .no { color: var(--line); }
+.matrix-note { font-size: 13px; color: var(--muted); margin-top: 12px; }
+
+/* Timeline */
+.timeline { position: relative; display: grid; gap: 34px; padding-left: 34px; }
+.timeline::before { content: ""; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 3px; border-radius: 3px; background: linear-gradient(180deg, var(--violet-strong), var(--green)); }
+.t-item { position: relative; display: grid; gap: 6px; }
+.t-item::before { content: ""; position: absolute; left: -34px; top: 6px; width: 17px; height: 17px; border-radius: 50%; background: var(--bg); border: 3px solid var(--violet); }
+.t-item:last-child::before { border-color: var(--green); }
+.t-date { font-family: var(--f-mono); font-size: 13px; color: var(--violet); }
+.t-item h3 { font-family: var(--f-display); font-weight: 700; font-size: 20px; margin: 0; }
+.t-item .org { color: var(--muted); font-size: 15px; }
+.t-item p { margin: 4px 0 0; max-width: 64ch; }
+
+/* Veille + certifications */
+.duo { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; }
+.duo > * { min-width: 0; }
+.panel { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 24px; display: grid; gap: 16px; align-content: start; }
+.panel h3 { font-family: var(--f-display); font-weight: 700; font-size: 20px; margin: 0; }
+.panel p { margin: 0; color: var(--muted); font-size: 15px; }
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.list li { display: grid; grid-template-columns: auto 1fr; gap: 12px; font-size: 15px; }
+.list li::before { content: ">"; font-family: var(--f-mono); color: var(--green); }
+.list .st { font-family: var(--f-mono); font-size: 12px; color: var(--muted); display: block; }
+@media (max-width: 760px) { .duo { grid-template-columns: 1fr; } }
+
+/* Contact */
+.contact-box { border: 1px solid var(--line); border-radius: 18px; padding: 36px; background:
+  radial-gradient(ellipse 60% 120% at 0% 0%, var(--glow), transparent 70%), var(--surface);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+.contact-box > * { min-width: 0; }
+.contact-box p { color: var(--muted); margin: 10px 0 0; max-width: 46ch; }
+.channels { display: grid; gap: 12px; }
+.channel { display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: var(--bg-2); }
+.channel > div { min-width: 0; }
+.channel .k { font-family: var(--f-mono); font-size: 11.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.channel .v { font-family: var(--f-mono); font-size: 14px; color: var(--fg); user-select: all; overflow-wrap: anywhere; }
+@media (max-width: 760px) { .contact-box { grid-template-columns: 1fr; padding: 24px; } }
+
+.todo { font-family: var(--f-mono); font-style: italic; color: var(--muted); opacity: .85; }
+.todo::before { content: "// "; color: var(--violet); font-style: normal; }
+.tag.todo-tag { color: var(--muted); background: transparent; border-style: dashed; border-color: var(--line); font-style: italic; }
+
+footer { padding-block: 40px 56px; color: var(--muted); font-size: 13px; font-family: var(--f-mono); border-top: 1px solid var(--line); margin-top: 40px; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+</style>
+</head>
+<body>
+
+<nav class="top" aria-label="Navigation principale">
+  <div class="wrap">
+    <a class="brand" href="#top">adam.chiboub<span>:~$</span></a>
+    <ul class="nav-links">
+      <li><a href="#apropos">À propos</a></li>
+      <li><a href="#competences">Compétences</a></li>
+      <li><a href="#realisations">Réalisations</a></li>
+      <li><a href="#synthese">Synthèse</a></li>
+      <li><a href="#experience">Parcours</a></li>
+      <li><a href="#veille">Veille</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header id="top" class="wrap hero">
+  <p class="role">étudiant en BTS SIO · option SISR<span class="cursor" aria-hidden="true"></span></p>
+  <h1>Adam Chiboub</h1>
+  <p class="lead">J'apprends à installer, sécuriser et maintenir les infrastructures réseau et système d'une organisation. Ce portfolio rassemble mes réalisations professionnelles et les compétences qu'elles mobilisent pour l'épreuve E5.</p>
+  <div class="hero-actions">
+    <a class="btn btn-grad" href="#contact">Me contacter →</a>
+    <a class="btn btn-ghost" href="#realisations">Voir mes réalisations</a>
+  </div>
+  <div class="facts">
+    <span>formation <b>Institut Limayrac, Toulouse</b></span>
+    <span>année <b>1ʳᵉ année · 2025/2026</b></span>
+    <span>bloc <b>Support et mise à disposition de services informatiques</b></span>
+  </div>
+</header>
+
+<main>
+  <section id="apropos" class="wrap">
+    <div class="sec-head"><h2>À propos</h2></div>
+    <div class="about">
+      <div>
+        <p>Je suis en première année de BTS Services Informatiques aux Organisations, spécialité Solutions d'Infrastructure, Systèmes et Réseaux, à l'Institut Limayrac.</p>
+        <p class="todo">à compléter : ce qui t'attire dans l'informatique, ton projet professionnel</p>
+        <div class="tags" aria-label="Centres d'intérêt">
+          <span class="tag todo-tag">à compléter</span><span class="tag todo-tag">à compléter</span><span class="tag todo-tag">à compléter</span>
+        </div>
+      </div>
+      <aside class="idcard" aria-label="Fiche d'identité">
+        <dl>
+          <dt>nom</dt><dd>Adam Chiboub</dd>
+          <dt>cursus</dt><dd>BTS SIO · SISR</dd>
+          <dt>école</dt><dd>Institut Limayrac</dd>
+          <dt>année</dt><dd>2025 → 2027</dd>
+          <dt>projet</dt><dd class="todo">à compléter</dd>
+          <dt>statut</dt><dd style="color:var(--green)">● en formation</dd>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section id="competences" class="wrap">
+    <div class="sec-head">
+      <h2>Compétences</h2>
+      <p>Les six compétences du bloc évalué à l'épreuve E5, et les outils avec lesquels je les mets en pratique.</p>
+    </div>
+    <div class="skills">
+      <article class="skill">
+        <span class="code">B1.1</span>
+        <h3>Gérer le patrimoine informatique</h3>
+        <p>Recenser le matériel, gérer les droits et les sauvegardes, vérifier la continuité de service.</p>
+        <div class="tags"><span class="tag todo-tag">outils à compléter</span></div>
+      </article>
+      <article class="skill">
+        <span class="code">B1.2</span>
+        <h3>Répondre aux incidents et demandes</h3>
+        <p>Collecter, diagnostiquer et résoudre les demandes d'assistance en suivant une procédure.</p>
+        <div class="tags"><span class="tag todo-tag">outils à compléter</span></div>
+      </article>
+      <article class="skill">
+        <span class="code">B1.3</span>
+        <h3>Développer la présence en ligne</h3>
+        <p>Valoriser l'image de l'organisation, publier un site conforme et mesurer sa visibilité.</p>
+        <div class="tags"><span class="tag todo-tag">outils à compléter</span></div>
+      </article>
+      <article class="skill">
+        <span class="code">B1.4</span>
+        <h3>Travailler en mode projet</h3>
+        <p>Analyser les besoins, découper en tâches, planifier et rendre compte des écarts.</p>
+        <div class="tags"><span class="tag todo-tag">outils à compléter</span></div>
+      </article>
+      <article class="skill">
+        <span class="code">B1.5</span>
+        <h3>Mettre à disposition un service</h3>
+        <p>Tester, déployer un service et accompagner les utilisateurs avec une documentation.</p>
+        <div class="tags"><span class="tag todo-tag">outils à compléter</span></div>
+      </article>
+      <article class="skill">
+        <span class="code">B1.6</span>
+        <h3>Organiser son développement professionnel</h3>
+        <p>Assurer une veille régulière, gérer son identité professionnelle et se former.</p>
+        <div class="tags"><span class="tag todo-tag">outils à compléter</span></div>
+      </article>
+    </div>
+
+    <div class="tech">
+      <div class="tech-row"><span>Systèmes</span><div class="tags"><span class="tag todo-tag">à compléter</span></div></div>
+      <div class="tech-row"><span>Réseau</span><div class="tags"><span class="tag todo-tag">à compléter</span></div></div>
+      <div class="tech-row"><span>Virtualisation</span><div class="tags"><span class="tag todo-tag">à compléter</span></div></div>
+      <div class="tech-row"><span>Scripts &amp; outils</span><div class="tags"><span class="tag todo-tag">à compléter</span></div></div>
+    </div>
+  </section>
+
+  <section id="realisations" class="wrap">
+    <div class="sec-head">
+      <h2>Réalisations professionnelles</h2>
+      <p>Chaque réalisation précise son cadre (TP, atelier de professionnalisation, stage) et les compétences du bloc qu'elle mobilise.</p>
+    </div>
+    <div class="projects">
+      <article class="project">
+        <div class="meta"><span class="ctx todo">cadre à compléter</span><span>R1</span></div>
+        <h3>Titre de la réalisation à compléter</h3>
+        <p class="todo">à compléter : contexte et objectif</p>
+        <ul>
+          <li class="todo">à compléter : tâche réalisée</li>
+          <li class="todo">à compléter : tâche réalisée</li>
+        </ul>
+        <div class="tags"><span class="tag todo-tag">outils à compléter</span></div>
+        <div class="comp"><b>Compétences :</b> <span class="todo">à compléter</span></div>
+      </article>
+      <article class="project">
+        <div class="meta"><span class="ctx todo">cadre à compléter</span><span>R2</span></div>
+        <h3>Titre de la réalisation à compléter</h3>
+        <p class="todo">à compléter : contexte et objectif</p>
+        <ul>
+          <li class="todo">à compléter : tâche réalisée</li>
+          <li class="todo">à compléter : tâche réalisée</li>
+        </ul>
+        <div class="tags"><span class="tag todo-tag">outils à compléter</span></div>
+        <div class="comp"><b>Compétences :</b> <span class="todo">à compléter</span></div>
+      </article>
+      <article class="project">
+        <div class="meta"><span class="ctx todo">cadre à compléter</span><span>R3</span></div>
+        <h3>Titre de la réalisation à compléter</h3>
+        <p class="todo">à compléter : contexte et objectif</p>
+        <ul>
+          <li class="todo">à compléter : tâche réalisée</li>
+          <li class="todo">à compléter : tâche réalisée</li>
+        </ul>
+        <div class="tags"><span class="tag todo-tag">outils à compléter</span></div>
+        <div class="comp"><b>Compétences :</b> <span class="todo">à compléter</span></div>
+      </article>
+      <article class="project">
+        <div class="meta"><span class="ctx todo">cadre à compléter</span><span>R4</span></div>
+        <h3>Titre de la réalisation à compléter</h3>
+        <p class="todo">à compléter : contexte et objectif</p>
+        <ul>
+          <li class="todo">à compléter : tâche réalisée</li>
+          <li class="todo">à compléter : tâche réalisée</li>
+        </ul>
+        <div class="tags"><span class="tag todo-tag">outils à compléter</span></div>
+        <div class="comp"><b>Compétences :</b> <span class="todo">à compléter</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="synthese" class="wrap">
+    <div class="sec-head">
+      <h2>Tableau de synthèse</h2>
+      <p>Vue d'ensemble des réalisations et des compétences qu'elles couvrent. L'ensemble doit mobiliser toutes les compétences du bloc.</p>
+    </div>
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th scope="col">Réalisation</th>
+            <th scope="col">Gérer le<br>patrimoine</th>
+            <th scope="col">Incidents &amp;<br>assistance</th>
+            <th scope="col">Présence<br>en ligne</th>
+            <th scope="col">Mode<br>projet</th>
+            <th scope="col">Mise à dispo.<br>d'un service</th>
+            <th scope="col">Dév.<br>professionnel</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">R1 · <span class="todo">à compléter</span></th><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td></tr>
+          <tr><th scope="row">R2 · <span class="todo">à compléter</span></th><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td></tr>
+          <tr><th scope="row">R3 · <span class="todo">à compléter</span></th><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td></tr>
+          <tr><th scope="row">R4 · <span class="todo">à compléter</span></th><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="matrix-note">Le tableau officiel de synthèse et les attestations de stage sont joints au dossier numérique.</p>
+  </section>
+
+  <section id="experience" class="wrap">
+    <div class="sec-head"><h2>Parcours</h2></div>
+    <div class="timeline">
+      <div class="t-item">
+        <span class="t-date todo">dates à compléter</span>
+        <h3>Stage de première année</h3>
+        <span class="org todo">entreprise à compléter</span>
+        <p class="todo">à compléter : missions réalisées</p>
+      </div>
+      <div class="t-item">
+        <span class="t-date">sept. 2025 → aujourd'hui</span>
+        <h3>BTS SIO, option SISR</h3>
+        <span class="org">Institut Limayrac · Toulouse</span>
+        <p class="todo">à compléter : ce que tu apprends</p>
+      </div>
+      <div class="t-item">
+        <span class="t-date todo">date à compléter</span>
+        <h3>Formation précédente</h3>
+        <span class="org todo">établissement à compléter</span>
+        <p class="todo">à compléter</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="veille" class="wrap">
+    <div class="sec-head">
+      <h2>Veille et développement</h2>
+      <p>Comment je me tiens à jour et comment je construis mon identité professionnelle.</p>
+    </div>
+    <div class="duo">
+      <div class="panel">
+        <h3>Veille technologique</h3>
+        <p class="todo">sujet de veille à compléter</p>
+        <ul class="list">
+          <li><div><span class="todo">source à compléter</span><span class="st todo">fréquence à compléter</span></div></li>
+          <li><div><span class="todo">source à compléter</span><span class="st todo">fréquence à compléter</span></div></li>
+          <li><div><span class="todo">source à compléter</span><span class="st todo">fréquence à compléter</span></div></li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Certifications et formations</h3>
+        <ul class="list">
+          <li><div><span class="todo">certification à compléter</span><span class="st todo">statut à compléter</span></div></li>
+          <li><div><span class="todo">certification à compléter</span><span class="st todo">statut à compléter</span></div></li>
+        </ul>
+        <p class="todo">profil LinkedIn à compléter</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="wrap">
+    <div class="contact-box">
+      <div>
+        <div class="sec-head" style="margin:0"><h2>Me contacter</h2></div>
+        <p class="todo">à compléter : ce que tu recherches (stage, alternance…)</p>
+      </div>
+      <div class="channels">
+        <div class="channel">
+          <div><div class="k">e-mail</div><div class="v todo">à compléter</div></div>
+        </div>
+        <div class="channel">
+          <div><div class="k">linkedin</div><div class="v todo">à compléter</div></div>
+        </div>
+        <div class="channel">
+          <div><div class="k">github</div><div class="v todo">à compléter</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Adam Chiboub</span>
+    <span>BTS SIO · SISR · Institut Limayrac</span>
+  </div>
+</footer>
+</body>
+</html>
